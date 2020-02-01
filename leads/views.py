@@ -8,24 +8,28 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import PostSerializer
 from .models import Post
+from rest_framework import generics, mixins
 
+class TestView(generics.ListCreateAPIView):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
 
-class TestView(APIView):
-
-    permission_classes = (IsAuthenticated, )
-
-    def get(self, request, *args, **kwargs):
-        qs = Post.objects.all()
-        serializer = PostSerializer(qs, many = True)
-        return Response(serializer.data)
-
-    def post(self, request, *args, **kwargs):
-        serializer = PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors)
+# class TestView(APIView):
+#
+#     permission_classes = (IsAuthenticated, )
+#
+#     def get(self, request, *args, **kwargs):
+#         qs = Post.objects.all()
+#         serializer = PostSerializer(qs, many = True)
+#         return Response(serializer.data)
+#
+#     def post(self, request, *args, **kwargs):
+#         serializer = PostSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         else:
+#             return Response(serializer.errors)
 
 # def test_view(request):
 #     data = {
