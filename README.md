@@ -1,5 +1,5 @@
 # react_ui
-This repo contains Full stack Django/React/Redux app that uses token based authentication with Knox.
+This repo contains Full stack Django/React app with extensive use of api's and also token authentication services.
 
 # Install dependencies
 npm install
